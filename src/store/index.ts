@@ -3,8 +3,8 @@ import Vuex, { StoreOptions } from "vuex";
 import VuexPersist from "@/plugins/vuex-persist";
 import { RootState } from "@/store/types";
 import { authModule } from '@/store/modules/auth';
-import { ficharModule } from '@/store/modules/fichar';
-import { informesModule } from '@/store/modules/informes';
+import { fugaModule } from '@/store/modules/fuga';
+
 Vue.use(Vuex);
 
 const store: StoreOptions<RootState> = {
@@ -14,6 +14,7 @@ const store: StoreOptions<RootState> = {
   },
   modules: {
     authModule,
+    fugaModule,
   },
   // @ts-ignore
   plugins: [VuexPersist.plugin]

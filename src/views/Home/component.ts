@@ -1,16 +1,27 @@
 //@ts-nocheck
 import { Component, Vue, Watch } from "vue-property-decorator";
+import { Action, State } from "vuex-class";
 import Template from "./template.vue";
+import PanelLeaks from "@/components/PanelLeaks/component";
+
 
 Component.registerHooks(["beforeRouteEnter"]);
 
 @Component({
-  mixins: [Template]
+  mixins: [Template],
+  components:{
+    PanelLeaks
+  }
 })
+
 export default class Home extends Vue {
+  @Action("getFuga", { namespace: "fugaModule" }) getFuga!: Function;
+  @State("fugas", { namespace: "fugaModule" }) fugas!: Object;
+
   public valid: boolean = false;
   public btnLoading: boolean = false;
   public termino: string = "";
+  public tipo: string = "";
   public tipos: object = [
     { nombre: 'Usuario', valor: '1'},
     { nombre: 'Correo electrónico', valor: '2'},
@@ -26,10 +37,21 @@ export default class Home extends Vue {
   public rulesTipo: object = [
     v => !!v || 'El tipo es obligatorio',
   ];
+  /* public fugas: object = []; */
 
-  submit(): void{
+  async submit(): Promise<void>{
     if(this.$refs.form.validate()){
-
+      this.btnLoading = true;
+      let result = await this.getFuga({
+        tipo: this.tipo,
+        termino: this.termino
+      });
+      this.btnLoading = false;
+      /* if(result){
+        console.log(result);
+      }else{
+        console.log(result);
+      } */
     }
   }
 

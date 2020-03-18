@@ -5,8 +5,6 @@ import { Route } from "vue-router";
 import { User } from "@/store/modules/auth/types";
 import Template from "./template.vue";
 
-const namespace: string = 'authModule'
-
 Component.registerHooks(["beforeRouteEnter"]);
 
 @Component({
@@ -14,10 +12,10 @@ Component.registerHooks(["beforeRouteEnter"]);
 })
 export default class Login extends Vue {
   public user: Partial<User> = {};
-  @State("isLogged", { namespace }) isLogged!: boolean;
-  @State("error", { namespace }) error!: boolean;
-  @State("errorMessage", { namespace }) errorMessage!: string;
-  @Action("login", { namespace }) login!: Function;
+  @State("isLogged", { namespace: "authModule" }) isLogged!: boolean;
+  @State("error", { namespace: "authModule" }) error!: boolean;
+  @State("errorMessage", { namespace: "authModule" }) errorMessage!: string;
+  @Action("login", { namespace: "authModule" }) login!: Function;
 
   public rulesUsuario: object = [
     v => !!v || 'El usuario es obligatorio',
@@ -30,15 +28,27 @@ export default class Login extends Vue {
     v => (v && v.length <= 10) || 'La contraseña debe tener menos de 10 caracteres',
   ];
 
+  public errorLogin: boolean = false;
   public valid: boolean = false;
   public verPassword: boolean = false;
   public btnLoading: boolean = false;
   public usuario: string = "";
   public password: string = "";
 
-  submit(): void{
+  async submit(): Promise<void>{
     if(this.$refs.form.validate()){
-
+      this.btnLoading=true;
+      let result = await this.login({
+        username: this.usuario,
+        password: this.password
+      });
+      this.btnLoading=false;
+      if(result){
+        this.$router.push({name: "Inicio"});
+      }else{
+        this.password = "";
+        this.errorLogin = true;
+      }
     }
   }
 

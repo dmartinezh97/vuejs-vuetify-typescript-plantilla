@@ -7,8 +7,9 @@
             <v-toolbar color="teal" dark flat>
               <v-toolbar-title>Iniciar sesión</v-toolbar-title>
             </v-toolbar>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" @keyup.enter.native="submit" v-model="valid" lazy-validation>
               <v-card-text>
+                <v-alert v-if="errorLogin" dense outlined type="error">Usuario o contraseña incorrecto</v-alert>
                   <v-text-field
                     label="Usuario"
                     v-model="usuario"
