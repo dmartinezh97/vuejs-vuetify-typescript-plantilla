@@ -1,20 +1,31 @@
 <template>
-  <div>
-    <v-card class="mx-auto" outlined>
-      <v-list-item three-line>
-        <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-        <v-list-item-content>
-          <div class="overline mb-4">OVERLINE</div>
-          <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-          <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-card-actions>
-        <v-btn text>Button</v-btn>
-        <v-btn text>Button</v-btn>
-      </v-card-actions>
-    </v-card>
-  </div>
+  <v-data-table
+    :headers="headers"
+    :items="fugas"
+    class="elevation-1"
+    no-data-text="No hay resultados"
+    hide-default-footer
+  ></v-data-table>
+  <!-- <v-row>
+    <v-col v-for="(n,i) in 5" :key="i" sm="12" md="6">
+      <v-card class="mx-auto" outlined>
+        <v-list-item>
+          <v-avatar color="white" size="36" class="mr-3">
+            <img src="https://monitor.cdn.mozilla.net/img/logos/000webhost.png" alt="000webhost">
+          </v-avatar>
+          <v-list-item-content>
+            <v-list-item-title class="vue-title">000webhost</v-list-item-title>
+            <v-list-item-subtitle class="vue-key">Filtración añadida</v-list-item-subtitle>
+            <v-list-item-subtitle class="vue-value">9 de marzo de 2019</v-list-item-subtitle>
+            <v-list-item-subtitle class="vue-key">Filtración añadida</v-list-item-subtitle>
+            <v-list-item-subtitle class="vue-value">9 de marzo de 2019</v-list-item-subtitle>
+            <v-list-item-subtitle class="vue-key">Filtración añadida</v-list-item-subtitle>
+            <v-list-item-subtitle class="vue-value">9 de marzo de 2019</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-col>
+  </v-row> -->
   <!-- <v-simple-table>
     <template v-slot:default>
       <thead>
@@ -48,3 +59,23 @@
     </v-expansion-panel>
   </v-expansion-panels>-->
 </template>
+
+<style>
+.vue-title{
+  display: block;
+  padding-top: 2px;
+  font-weight: 600;
+}
+.vue-key{
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+  color: #5b5b5b;
+}
+.vue-value{
+  display: block;
+  font-size: 14px;
+  color: white!important;
+  font-weight: 500;
+}
+</style>

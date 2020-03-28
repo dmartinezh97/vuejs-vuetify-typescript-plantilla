@@ -4,7 +4,7 @@ export interface User{
     password: string;
     email: string;
     token: string;
-    tipoUsuario: string;
+    rol: string;
 }
 
 export interface AuthState{

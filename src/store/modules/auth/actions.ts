@@ -15,7 +15,7 @@ export const actions: AuthActionTree = {
       //const token: string = store.getters["authModule/getToken"];
       const response: AxiosResponse = await Vue.axios({
         method: "POST",
-        url: "/usuario/authenticate",
+        url: "/auth/authenticate",
         data: payload
       });
       context.commit("setUser", response.data);

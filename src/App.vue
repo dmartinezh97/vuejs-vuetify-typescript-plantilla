@@ -26,6 +26,12 @@ export default class App extends Vue {}
 </script>
 
 <style>
+html, body{
+  font-family: 'Roboto', sans-serif;
+}
+#app{
+  font-family: 'Roboto', sans-serif;
+}
 /* html, body{
   height: 100%;
   background-color: #eaeaea;

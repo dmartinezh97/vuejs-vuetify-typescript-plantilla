@@ -11,19 +11,18 @@ type FugaActionContext = ActionContext<Fuga, RootState>;
 type FugaActionTree = ActionTree<Fuga, RootState>;
 
 export const actions: FugaActionTree = {
-  //context: FugaActionContext
   async getFuga(context: FugaActionContext, payload: object): Promise<any> {
     try {
+      const token: string = store.getters["authModule/getToken"];
       const response: AxiosResponse = await Vue.axios({
         method: "POST",
         url: "/Fuga/GetFuga",
-        /* headers: {
-          'Content-Type': 'application/json'
-        }, */
+        headers: {
+          Authorization: "Bearer " + token
+        },
         data: payload
       });
-      context.commit("setFuga", response.data);
-      return response;
+      return response.data;
     } catch (error) {
       return error;
     }
